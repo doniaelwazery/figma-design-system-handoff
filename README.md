@@ -29,7 +29,19 @@ Steps 1, 2 and 5 work without a codebase. Steps 3, 4 and 6 need one.
 
 ## Install
 
-**In one project** (shared with your team through git): copy `.claude/skills/figma-design-system-handoff/` into your project's `.claude/skills/` folder and commit it.
+**Easiest: let Claude Code do it.** Open Claude Code in your project and paste:
+
+```
+Install the Claude Code skill from https://github.com/doniaelwazery/figma-design-system-handoff
+into this project: copy the .claude/skills/figma-design-system-handoff folder
+into this project's .claude/skills/. Then check that the Figma plugin is installed,
+and install it if not: claude plugin install figma@claude-plugins-official
+```
+
+Then run `/reload-skills` (or restart Claude Code) and `/mcp` to sign in to Figma.
+Want it in every project? Replace "this project's .claude/skills/" with "~/.claude/skills/".
+
+**Manually, in one project** (shared with your team through git): copy `.claude/skills/figma-design-system-handoff/` into your project's `.claude/skills/` folder and commit it.
 
 **For yourself in every project:** copy the same folder into `~/.claude/skills/`.
 
