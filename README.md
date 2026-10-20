@@ -2,15 +2,27 @@
 
 A [Claude Code](https://code.claude.com) skill that walks a designer, step by step, through handing off a Figma design system to developers in the AI era.
 
-It asks for your Figma link first, checks everything read-only, and **asks for your approval before every change**.
+It asks for your Figma link and your platform first, checks everything read-only, and **asks for your approval before every change**.
+
+## Platform-aware naming
+
+Tokens get the names developers on your platform actually type:
+
+| Platform | Convention | Example code syntax |
+|---|---|---|
+| Web | Tailwind CSS (v4 or v3) | `var(--color-primary)` → `bg-primary` |
+| Android | Material Design 3 (Compose or XML Views) | `MaterialTheme.colorScheme.onSurface` |
+| iOS | Apple Human Interface Guidelines (SwiftUI or UIKit) | `Color(.label)`, `Font.body` |
+
+Pick one or several. Tokens that match a built-in role (an M3 color role, a HIG text style) map to it; everything else gets a custom name in the platform's style. Every mapping is shown to you for approval.
 
 ## The 6 steps
 
 | # | Step | What happens |
 |---|------|--------------|
-| 1 | Make the tokens machine-readable | Audits variables, normalizes names, adds code syntax (`var(--color-text-primary)`) and scopes |
+| 1 | Make the tokens machine-readable | Audits variables, normalizes names, adds platform code syntax (Tailwind / Material 3 / HIG) and scopes |
 | 2 | Make components code-shaped | Real prop names instead of `Property 1`, removes duplicates, binds hardcoded colors, adds usage notes |
-| 3 | Export tokens into the codebase | `tokens.json` (W3C DTCG) + Style Dictionary → CSS variables / Tailwind |
+| 3 | Export tokens into the codebase | `tokens.json` (W3C DTCG) → Tailwind theme, Compose `MaterialTheme`, or iOS asset catalog + Swift |
 | 4 | Connect Figma to code | Code Connect maps each Figma component to its code component |
 | 5 | Write the rulebook | `DESIGN.md` + hard rules in `CLAUDE.md` that Claude follows every session |
 | 6 | Test and keep in sync | Builds one real screen, compares it to Figma, sets up a sync routine |
